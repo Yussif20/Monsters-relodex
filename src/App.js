@@ -16,10 +16,10 @@ class App extends Component {
         this.setState(
           () => {
             return { Monsters: users };
-          },
-          () => {
-            console.log(this.state);
           }
+          // () => {
+          //   console.log(this.state);
+          // }
         )
       );
   }
@@ -31,7 +31,13 @@ class App extends Component {
           placeholder="search monsters"
           type="search"
           onChange={(event) => {
-            console.log(event);
+            const searchString = event.target.value.toLowerCase();
+            const filteredMonsters = this.state.Monsters.filter((monster) => {
+              return monster.name.toLowerCase().includes(searchString);
+            });
+            this.setState(() => {
+              return { Monsters: filteredMonsters };
+            });
           }}
         />
         {this.state.Monsters.map((monster) => {
